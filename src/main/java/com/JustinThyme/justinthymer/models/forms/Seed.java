@@ -1,0 +1,85 @@
+package com.JustinThyme.justinthymer.models.forms;
+
+import com.JustinThyme.justinthymer.models.forms.Packet;
+
+import java.util.ArrayList;
+import java.util.Date; //note may need to import java.sql.Date (?)
+
+
+//@Entity note add validations and javax later
+public class Seed {
+
+    //@Id
+    //@GeneratedValue
+    private int id;
+    public String name;
+
+    public enum Area {
+        WESTCOAST, INNERNW, INNERSW, SOUTH, MIDNORTH, EASTCOAST, FLORIDA
+    }
+
+    public enum Season {
+        FALL, WINTER, SPRING, SUMMER
+    }
+
+    public Area area;
+    public Season season;
+    public Date plantDate;
+    Boolean reminder; //note package private so can set in Packet
+
+    //@ManyToMany
+    private ArrayList<Packet> packets;
+
+
+    public Seed(String aName, Area anArea, Season aSeason, Date aDate, Boolean reminder) {
+        this.name = aName;
+        this.area = anArea;
+        this.season = aSeason;
+        this.plantDate = aDate;
+        this.reminder = false;
+    }
+
+    public Seed () { }
+
+    public int getId() { return id; }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
+    }
+
+    public Date getPlantDate() {
+        return plantDate;
+    }
+
+    public void setPlantDate(Date plantDate) {
+        this.plantDate = plantDate;
+    }
+
+    //note following in Packet for now
+//    public Boolean getReminder() {
+//        return reminder;
+//    }
+//
+//    public void setReminder(Boolean reminder) {
+//        this.reminder = reminder;
+//    }
+}
