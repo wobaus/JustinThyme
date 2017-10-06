@@ -2,15 +2,17 @@ package com.JustinThyme.justinthymer.models.forms;
 
 import com.JustinThyme.justinthymer.models.forms.Packet;
 
+import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date; //note may need to import java.sql.Date (?)
 
 
-//@Entity note add validations and javax later
+@Entity
 public class Seed {
 
-    //@Id
-    //@GeneratedValue
+    @Id
+    @GeneratedValue
     private int id;
     public String name;
 
@@ -27,7 +29,7 @@ public class Seed {
     public Date plantDate;
     Boolean reminder; //note package private so can set in Packet
 
-    //@ManyToMany
+    @ManyToMany
     private ArrayList<Packet> packets;
 
 

@@ -1,17 +1,23 @@
 package com.JustinThyme.justinthymer.models.forms;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
+@Entity
 public class Packet {
 
-    //@Id
-    //@GeneratedValue
+    @Id
+    @GeneratedValue
     private int id;
 
-    //@OneToOne note ??
+    @NotNull
+    @OneToOne //note ??
+    //@JoinColumn(name="user_id")
     private int user_id;
 
-    //@ManyToMany
+
+    @ManyToMany
     private ArrayList<Seed> seeds; //note List, Iterable instead?
 
     public Packet() { }

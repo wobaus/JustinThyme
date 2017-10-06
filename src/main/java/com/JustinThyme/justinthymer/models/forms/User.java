@@ -3,33 +3,38 @@ package com.JustinThyme.justinthymer.models.forms;
 import com.JustinThyme.justinthymer.models.forms.Packet;
 import com.JustinThyme.justinthymer.models.forms.Seed;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
+@Entity
 public class User {
 
-    //@Id
-    //@GeneratedValue
+    @Id
+    @GeneratedValue
     private int id;
 
-    //@NotNull
+    @NotNull
     public String username;
 
-    //@NotNull
-    //@Size(min=6, message="Passwords must be at least six characters.")
+    @NotNull
+    @Size(min=6, message="Passwords must be at least six characters.")
     private String password;
 
-    //@NotNull
+    @NotNull
     private String verifyPassword;
 
     //note NotNull ? or keep optional IF user wants updates
     //note needs to be string for twillio
     private String phoneNumber;
 
-
+    @JoinColumn(name = "user_id")
     public ArrayList<Packet> seeds;
 
-    private int userId;
-    private static int nextId = 1;
 
     private Seed.Area area;
 
