@@ -114,4 +114,8 @@ public class User {
             verifyPassword = null;
         }
     }
+
+    public static void add(User user) {
+        User.add(user);
+    }
 }
