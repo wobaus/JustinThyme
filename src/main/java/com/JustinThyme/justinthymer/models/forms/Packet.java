@@ -1,4 +1,4 @@
-package com.JustinThyme.justinthymer.models;
+package com.JustinThyme.justinthymer.models.forms;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ public class Packet {
 
 
     @ManyToMany
-    private Iterable<Seed> seeds; //note List, Iterable instead?
+    private ArrayList<Seed> seeds; //note List, Iterable instead?
     //I think an interable would be preferred here, it's more similar to how the cHeese app is set up
 
     public Packet() { }
@@ -34,11 +34,11 @@ public class Packet {
         this.user_id = user_id;
     }
 
-    public Iterable<Seed> getSeeds() {
+    public ArrayList<Seed> getSeeds() {
         return seeds;
     }
 
-    public void setSeeds(Iterable<Seed> seeds) {
+    public void setSeeds(ArrayList<Seed> seeds) {
         this.seeds = seeds;
     }
 

@@ -1,7 +1,7 @@
-package com.JustinThyme.justinthymer.models;
+package com.JustinThyme.justinthymer.models.forms;
 
-import com.JustinThyme.justinthymer.models.Packet;
-import com.JustinThyme.justinthymer.models.Seed;
+import com.JustinThyme.justinthymer.models.forms.Packet;
+import com.JustinThyme.justinthymer.models.forms.Seed;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
