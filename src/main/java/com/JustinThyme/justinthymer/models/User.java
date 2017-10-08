@@ -1,7 +1,7 @@
-package com.JustinThyme.justinthymer.models.forms;
+package com.JustinThyme.justinthymer.models;
 
-import com.JustinThyme.justinthymer.models.forms.Packet;
-import com.JustinThyme.justinthymer.models.forms.Seed;
+import com.JustinThyme.justinthymer.models.Packet;
+import com.JustinThyme.justinthymer.models.Seed;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -113,9 +113,5 @@ public class User {
         if (password!=null && verifyPassword!=null && !password.equals(verifyPassword)) {
             verifyPassword = null;
         }
-    }
-
-    public static void add(User user) {
-        User.add(user);
     }
 }

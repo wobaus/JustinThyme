@@ -1,6 +1,6 @@
-package com.JustinThyme.justinthymer.models.forms;
+package com.JustinThyme.justinthymer.models;
 
-import com.JustinThyme.justinthymer.models.forms.Packet;
+import com.JustinThyme.justinthymer.models.Packet;
 
 import javax.persistence.*;
 

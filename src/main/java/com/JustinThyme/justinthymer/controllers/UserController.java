@@ -1,6 +1,7 @@
 package com.JustinThyme.justinthymer.controllers;
 
-import com.JustinThyme.justinthymer.models.forms.User;
+import com.JustinThyme.justinthymer.models.User;
+import com.JustinThyme.justinthymer.models.data.UserDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -8,12 +9,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import javax.validation.Valid;
 
 
 @Controller
 @RequestMapping("user")
 public class UserController {
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private SeedDao seedDao;
 
 //    adding new user : sign-up
     @RequestMapping(value="add" , method = RequestMethod.GET)
@@ -27,7 +35,7 @@ public class UserController {
         if (!user.getPassword().equals(verifyPassword)) {
             return "user/add";
         } else {
-            User.add(user);
+            userDao.save(user);
             return "redirect:";
         }
 
