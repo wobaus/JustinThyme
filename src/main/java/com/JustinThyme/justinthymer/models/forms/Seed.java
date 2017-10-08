@@ -27,17 +27,19 @@ public class Seed {
     public Area area;
     public Season season;
     public Date plantDate;
+    public String message;
     Boolean reminder; //note package private so can set in Packet
 
     @ManyToMany
     private ArrayList<Packet> packets;
 
 
-    public Seed(String aName, Area anArea, Season aSeason, Date aDate, Boolean reminder) {
+    public Seed(String aName, Area anArea, Season aSeason, Date aDate, String message, Boolean reminder) {
         this.name = aName;
         this.area = anArea;
         this.season = aSeason;
         this.plantDate = aDate;
+        this.message = message;
         this.reminder = false;
     }
 
@@ -74,6 +76,14 @@ public class Seed {
 
     public void setPlantDate(Date plantDate) {
         this.plantDate = plantDate;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     //note following in Packet for now
