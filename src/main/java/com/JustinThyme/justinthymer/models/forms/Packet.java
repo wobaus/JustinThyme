@@ -19,6 +19,7 @@ public class Packet {
 
     @ManyToMany
     private ArrayList<Seed> seeds; //note List, Iterable instead?
+    //I think an interable would be preferred here, it's more similar to how the cHeese app is set up
 
     public Packet() { }
 
