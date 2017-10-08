@@ -1,4 +1,4 @@
-package com.JustinThyme.justinthymer.forms;
+package com.JustinThyme.justinthymer.models;
 
 import com.JustinThyme.justinthymer.models.Packet;
 
