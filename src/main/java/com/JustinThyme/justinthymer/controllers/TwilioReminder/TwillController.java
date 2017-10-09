@@ -1,4 +1,4 @@
-package com.JustinThyme.justinthymer.controllers.TwillioReminder;
+package com.JustinThyme.justinthymer.controllers.TwilioReminder;
 
 import com.JustinThyme.justinthymer.models.forms.Seed;
 import com.JustinThyme.justinthymer.models.forms.User;
@@ -25,7 +25,7 @@ public class TwillController {
 
         String number = user.getPhoneNumber(); ;//note will only work with my number for now
         // vs.  String number = userForm.getNumber()
-        String message = seed.getMessage();
+        String message = "It's time to plant " + seed.name;
         Date date = seed.plantDate;
 
         //note for this example, message waits 2000 miliseconds, then repeats every 10000 milseconds

@@ -39,7 +39,6 @@ public class Seed {
         this.area = anArea;
         this.season = aSeason;
         this.plantDate = aDate;
-        this.message = message;
         this.reminder = false;
     }
 
@@ -76,14 +75,6 @@ public class Seed {
 
     public void setPlantDate(Date plantDate) {
         this.plantDate = plantDate;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     //note following in Packet for now

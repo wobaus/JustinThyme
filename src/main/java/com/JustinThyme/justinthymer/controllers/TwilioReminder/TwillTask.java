@@ -1,11 +1,9 @@
-package com.JustinThyme.justinthymer.controllers.TwillioReminder;
+package com.JustinThyme.justinthymer.controllers.TwilioReminder;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static com.JustinThyme.justinthymer.controllers.TwillioReminder.TwillSend.twill_away;
-
-
+//import com.JustinThyme.justinthymer.controllers.TwilioReminder.TwillSend.*;
 
 public class TwillTask {
     Timer timer;
@@ -14,7 +12,9 @@ public class TwillTask {
         timer = new Timer();
         String message = null;
         String number = null;
+
         timer.schedule(new TwillReminder(message, number), seconds + 1000); //note wait time in milliseconds
+        //timer.schedule(new TwillTask.TwillReminder(message, number), date);
     }
 
 
@@ -28,7 +28,7 @@ public class TwillTask {
         }
         @Override
         public void run() {
-            twill_away(message, number);
+            TwillSend.twill_away(message, number);
             //timer.cancel(); //cancel in controller
         }
 
