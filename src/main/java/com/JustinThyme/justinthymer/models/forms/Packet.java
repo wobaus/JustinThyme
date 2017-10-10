@@ -12,13 +12,13 @@ public class Packet {
     private int id;
 
     @NotNull
-    @OneToOne //note ??
-    //@JoinColumn(name="user_id")
+    //@OneToOne //note ??
+    @JoinColumn(name="user_id")
     private int user_id;
 
 
     @ManyToMany
-    private ArrayList<Seed> seeds; //note List, Iterable instead?
+    ArrayList<Seed> seeds; //note List, Iterable instead?
     //I think an interable would be preferred here, it's more similar to how the cHeese app is set up
 
     public Packet() { }

@@ -26,8 +26,10 @@ public class TwillTask {
             this.message = message;
             this.number = number;
         }
+
         @Override
         public void run() {
+            //TODO iterate over users
             TwillSend.twill_away(message, number);
             //timer.cancel(); //cancel in controller
         }
