@@ -1,5 +1,7 @@
 package com.JustinThyme.justinthymer.models.forms;
 
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
