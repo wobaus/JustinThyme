@@ -1,11 +1,8 @@
-package org.launchcode.models.forms;
-
-import org.launchcode.models.Cheese;
-import org.launchcode.models.Menu;
+package com.JustinThyme.justinthymer.models.forms;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.Iterable;
+import javax.persistence.*;
 
 public class AddSeedToPacketForm {
 
