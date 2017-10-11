@@ -1,10 +1,11 @@
 package com.JustinThyme.justinthymer.models.forms;
 
-import org.springframework.data.annotation.Id;
-
+//import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Packet {
@@ -20,8 +21,8 @@ public class Packet {
 
 
     @ManyToMany
-    ArrayList<Seed> seeds; //note List, Iterable instead?
-    //I think an interable would be preferred here, it's more similar to how the cHeese app is set up
+    List<Seed> seeds;
+
 
     public Packet() { }
 
@@ -36,13 +37,13 @@ public class Packet {
         this.user_id = user_id;
     }
 
-    public ArrayList<Seed> getSeeds() {
+    public List<Seed> getSeeds() {
         return seeds;
     }
 
-    public void setSeeds(ArrayList<Seed> seeds) {
-        this.seeds = seeds;
-    }
+//    public void setSeeds(List<Seed> seeds) {
+//        this.seeds = seeds;
+//    }
 
     public void addSeed(Seed newSeed) {
         seeds.add(newSeed);

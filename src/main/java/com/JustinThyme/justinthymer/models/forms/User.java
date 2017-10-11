@@ -32,9 +32,9 @@ public class User {
     //note needs to be string for twillio
     private String phoneNumber;
 
-    @JoinColumn(name = "user_id")
-    private Packet packet;
-    //public ArrayList<Packet> seeds;
+//    @JoinColumn(name = "user_id")
+//    private Packet packet;
+//    //public ArrayList<Packet> seeds;
 
     @NotNull
     private Seed.Area area;
@@ -48,7 +48,7 @@ public class User {
         this.verifyPassword = verifyPassword;
         this.phoneNumber = phoneNumber;
 
-        this.packet = packet;
+        //this.packet = packet;
     }
 
     public User() { }
@@ -80,13 +80,13 @@ public class User {
         this.area = area;
     }
 
-    public Packet getPacket() {
-        return packet;
-    }
-
-    public void setPacket(Packet packet) {
-        this.packet = packet;
-    }
+//    public Packet getPacket() {
+//        return packet;
+//    }
+//
+//    public void setPacket(Packet packet) {
+//        this.packet = packet;
+//    }
 
     public String getPassword() {
         return password;

@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Date; //note may need to import java.sql.Date (?)
+import java.util.List;
 
 
 @Entity
@@ -30,16 +31,16 @@ public class Seed {
     //public String message;
     Boolean reminder; //note package private so can set in Packet
 
-    @ManyToMany
-    private ArrayList<Packet> packets;
+//    @ManyToMany
+//    private List<Packet> packets;
 
 
-    public Seed(String aName, Area anArea, Season aSeason, Date aDate, String message, ArrayList<Packet> packets, Boolean reminder) {
+    public Seed(String aName, Area anArea, Season aSeason, Date aDate, String message, List<Packet> packets, Boolean reminder) {
         this.name = aName;
         this.area = anArea;
         this.season = aSeason;
         this.plantDate = aDate;
-        this.packets = packets;
+        //this.packets = packets;
         this.reminder = false;
     }
 
