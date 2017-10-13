@@ -1,7 +1,5 @@
 package com.JustinThyme.justinthymer.models.forms;
 
-//import org.springframework.data.annotation.Id;
-import javax.persistence.Id;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -15,13 +13,13 @@ public class Packet {
     private int id;
 
     @NotNull
-    //@OneToOne //note ??
+
     @JoinColumn(name="user_id")
     private int user_id;
 
 
     @ManyToMany
-    List<Seed> seeds;
+    List<Seed> seeds = new ArrayList<>();
 
 
     public Packet() { }
@@ -41,9 +39,9 @@ public class Packet {
         return seeds;
     }
 
-//    public void setSeeds(List<Seed> seeds) {
-//        this.seeds = seeds;
-//    }
+    public void setSeeds(List<Seed> seeds) {
+        this.seeds = seeds;
+    }
 
     public void addSeed(Seed newSeed) {
         seeds.add(newSeed);

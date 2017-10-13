@@ -1,11 +1,9 @@
 package com.JustinThyme.justinthymer.models.forms;
 
-import com.JustinThyme.justinthymer.models.forms.Packet;
-
-import javax.persistence.*;
-
-import java.util.ArrayList;
-import java.util.Date; //note may need to import java.sql.Date (?)
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,7 +30,7 @@ public class Seed {
     Boolean reminder; //note package private so can set in Packet
 
 //    @ManyToMany
-//    private List<Packet> packets;
+//    private List<Packet> packets = new ArrayList<>();
 
 
     public Seed(String aName, Area anArea, Season aSeason, Date aDate, String message, List<Packet> packets, Boolean reminder) {
