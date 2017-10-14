@@ -37,7 +37,7 @@ public class MainController {
     public String splash(Model model) {
 
         model.addAttribute("title", "Welcome to JustinThyme");
-        return "JustinThyme/splash";
+        return "splash";
 
     }
 
