@@ -20,7 +20,7 @@ public class Seed {
     }
 
     public enum Season {
-        FALL, WINTER, SPRING, SUMMER
+        WINTER, SPRING, SUMMER, FALL
     }
 
     public Area area;
@@ -33,7 +33,8 @@ public class Seed {
 //    private List<Packet> packets = new ArrayList<>();
 
 
-    public Seed(String aName, Area anArea, Season aSeason, Date aDate, String message, List<Packet> packets, Boolean reminder) {
+    //note reminder not in constructor so defaulted to false (intentional)
+    public Seed(String aName, Area anArea, Season aSeason, Date aDate) {
         this.name = aName;
         this.area = anArea;
         this.season = aSeason;
