@@ -25,10 +25,13 @@ public class JustinThymeRApplication {
 		return(args) -> {
 			//note having trouble instantiating with default for reminder, so changed seed constructor
 			//note Date structure see notes in TwillController for details (year(-1900), month(-1), day, hour, minute)
-			seedDao.save(new Seed("carrot", WESTCOAST, FALL, new Date(117, 9, 7, 19, 41)));
-			seedDao.save(new Seed("peas", MIDNORTH, FALL, new Date(117, 9, 7, 19, 41)));
-			seedDao.save(new Seed("onions", SOUTH, SPRING, new Date(117, 3,15, 19, 22)));
-			seedDao.save(new Seed("carrot", FLORIDA, SUMMER, new Date(117, 5, 28, 19, 05)));
+//			seedDao.save(new Seed("carrot", WESTCOAST, FALL, new Date(117, 9, 7, 19, 41)));
+//			seedDao.save(new Seed("peas", MIDNORTH, FALL, new Date(117, 9, 7, 19, 41)));
+//			seedDao.save(new Seed("onions", SOUTH, SPRING, new Date(117, 3,15, 19, 22)));
+//			seedDao.save(new Seed("carrot", FLORIDA, SUMMER, new Date(117, 5, 28, 19, 05)));
+			seedDao.save(new Seed("carrot", WESTCOAST, FALL));
+			seedDao.save(new Seed("peas", EASTCOAST, SUMMER));
+			seedDao.save(new Seed("onion", FLORIDA, WINTER));
 		};
 	}
 
