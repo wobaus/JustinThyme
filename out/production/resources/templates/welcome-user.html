@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--TODO why does intelliJ recommend the above ref?-->
+
+<html lang="en" xmlns:th="http://www.thymeleag.org/">
+
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+
+<h1 th:text="|Welcome ${user.username}|">Default welcome</h1>
+
+<h2>Here are the contents of your seed packet:</h2>
+<tr th:each="seed : ${user.seeds}">
+    <ul>
+        <li th:text="|${seed.name} crops are typcically grown in ${seed.season}|. Reminder: {seed.reminder}"></li>
+        <!--TODO make seed.reminder == "ON" or "OFF"-->
+    </ul>
+</tr>
+
+</body>
+</html>
