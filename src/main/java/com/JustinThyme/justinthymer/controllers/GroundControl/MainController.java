@@ -60,14 +60,15 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "signup", method = RequestMethod.GET)
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("title", "New User!");
         model.addAttribute(new User());
-        return "signup";
+        model.addAttribute("areas", Seed.Area.values());
+        return "/signup";
     }
 
-    @RequestMapping(value = "signup", method = RequestMethod.POST)
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String add(@ModelAttribute @Valid User newUser, Errors errors, Model model,
                       String passwordVerify) {
 
@@ -76,12 +77,13 @@ public class MainController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Try again");
             model.addAttribute(newUser);
-            return "signup";
+            model.addAttribute("areas", Seed.Area.values());
+            return "/signup";
 
         } else {
             userDao.save(newUser);
             model.addAttribute("user", newUser);
-            return "welcome-user";
+            return "/welcome-user";
         }
     }
 
