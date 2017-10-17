@@ -19,8 +19,30 @@ public class Seed {
         WESTCOAST, INNERNW, INNERSW, SOUTH, MIDNORTH, EASTCOAST, FLORIDA
     }
 
+
     public enum Season {
-        FALL, WINTER, SPRING, SUMMER
+        WINTER, SPRING, SUMMER, FALL
+    }
+
+    public Date simpleDateGet (Season aSeason) {
+        switch(aSeason) {
+            case WINTER:
+
+                plantDate = new Date(117, 11, 21, 19, 05);
+                break;
+            case SPRING:
+                plantDate = new Date(118, 2, 20, 19,05);
+                break;
+            case SUMMER:
+                plantDate = new Date(118, 5, 21, 19, 05);
+                break;
+            case FALL:
+                plantDate = new Date(118, 8, 1, 19, 05);
+                break;
+            default:
+               plantDate = null;
+        }
+        return plantDate;
     }
 
     public Area area;
@@ -33,11 +55,14 @@ public class Seed {
 //    private List<Packet> packets = new ArrayList<>();
 
 
-    public Seed(String aName, Area anArea, Season aSeason, Date aDate, String message, List<Packet> packets, Boolean reminder) {
+    //note reminder not in constructor so defaulted to false (intentional)
+    public Seed(String aName, Area anArea, Season aSeason) {
         this.name = aName;
         this.area = anArea;
         this.season = aSeason;
-        this.plantDate = aDate;
+        //this.plantDate = aDate;
+        //Object self;
+        this.plantDate = simpleDateGet(aSeason);
         //this.packets = packets;
         this.reminder = false;
     }
