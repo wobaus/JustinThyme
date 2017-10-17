@@ -72,7 +72,7 @@ public class MainController {
                       String passwordVerify) {
 
         String username = newUser.username;
-        newUser.checkPassword();
+        //newUser.checkPassword();
         if (errors.hasErrors()) {
             model.addAttribute("title", "Try again");
             model.addAttribute(newUser);
