@@ -41,21 +41,24 @@ public class MainController {
 
     }
 
-    @RequestMapping(value="login", method = RequestMethod.GET)
+    @RequestMapping(value="/login", method = RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("title", "Log on in!");
-        return "login";
+        model.addAttribute(new User());
+        return "/login";
     }
-    @RequestMapping(value="login", method = RequestMethod.POST)
-    public String login(@ModelAttribute @Valid User someUser, Error errors, Model model) {
-        User knownUser = userDao.findOne(someUser.getId());
+    // @ModelAttribute @Valid User user, Error errors
+    @RequestMapping(value="/login", method = RequestMethod.POST)
+    public String login(Model model, User user) {
+        User knownUser = userDao.findOne(user.getId());
+        // User knownUser = userDao.findOne(findByUsername());
 
-        if (someUser.getPassword() == knownUser.getPassword()) {
-            model.addAttribute("user", someUser);
-            return "welcome-user";
+        if (user.getPassword() == knownUser.getPassword()) {
+            model.addAttribute("user", user);
+            return "/welcome-user";
         } else {
             model.addAttribute("title", "NO user by that name or incorrect password!");
-            return "login";
+            return "/login";
         }
     }
 
