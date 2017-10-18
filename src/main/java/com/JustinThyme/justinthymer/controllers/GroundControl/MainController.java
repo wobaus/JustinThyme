@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.JustinThyme.justinthymer.models.forms.Seed.Season.FALL;
 import static jdk.nashorn.internal.objects.NativeArray.length;
 
 
@@ -97,6 +98,8 @@ public class MainController {
             //Packet seeds = new Packet(newUser.getId(), seedDao.findByArea(area));
             List<Seed> seeds = new ArrayList<>();
             seeds = seedDao.findByArea(area);
+            List<Seed> seedsFall = seedDao.findBySeason(FALL);
+            System.out.println("^^^^^^^^^^^^^^^^^" + seedsFall.size());
             for (Seed seed:seeds) {
                 System.out.println(seed.getName());
             }
