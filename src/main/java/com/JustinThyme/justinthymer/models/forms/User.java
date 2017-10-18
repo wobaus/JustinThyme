@@ -28,8 +28,6 @@ public class User {
     @Size(min=6, message="Passwords must be at least six characters.")
     private String password;
 
-    @NotNull
-    private String verifyPassword;
 
     //note NotNull ? or keep optional IF user wants updates
     //note needs to be string for twillio
@@ -43,15 +41,12 @@ public class User {
     private Seed.Area area;
 
 
-    public User(String username, String password, String verifyPassword, Seed.Area area, String phoneNumber,
-                Packet packet) {
+    public User(String username, String password, Seed.Area area, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.area = area;
-        this.verifyPassword = verifyPassword;
         this.phoneNumber = phoneNumber;
 
-        //this.packet = packet;
     }
 
     public User() { }
@@ -83,13 +78,6 @@ public class User {
         this.area = area;
     }
 
-//    public Packet getPacket() {
-//        return packet;
-//    }
-//
-//    public void setPacket(Packet packet) {
-//        this.packet = packet;
-//    }
 
     public String getPassword() {
         return password;
@@ -97,21 +85,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-        checkPassword();
+        //checkPassword();
     }
-    public String getVerifyPassword() {
-        return verifyPassword;
+//    public String getVerifyPassword() {
+//        return verifyPassword;
+//    }
+//
+//    public void setVerifyPassword(String verifyPassword) {
+//        this.verifyPassword = verifyPassword;
+//        checkPassword();
+//    }
+//
+//
+//    public void checkPassword() {
+//        if (password!=null && verifyPassword!=null && !password.equals(verifyPassword)) {
+//            verifyPassword = null;
+//        }
     }
 
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
-        checkPassword();
-    }
-
-
-    public void checkPassword() {
-        if (password!=null && verifyPassword!=null && !password.equals(verifyPassword)) {
-            verifyPassword = null;
-        }
-    }
-}

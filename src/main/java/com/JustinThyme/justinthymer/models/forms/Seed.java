@@ -16,6 +16,7 @@ public class Seed {
     public String name;
 
     public enum Area {
+
         WESTCOAST ("West Coast"), INNERNW ("Inner Northwest"), INNERSW ("Inner Southwest"),
         SOUTH ("South"), MIDNORTH ("Mid North"), EASTCOAST ("East Coast"), FLORIDA ("Florida");
 
@@ -26,6 +27,7 @@ public class Seed {
         public String getName() {
             return name;
         }
+
     }
 
 
@@ -57,7 +59,7 @@ public class Seed {
     public Area area;
     public Season season;
     public Date plantDate;
-    //public String message;
+
     Boolean reminder; //note package private so can set in Packet
 
 //    @ManyToMany
@@ -69,8 +71,7 @@ public class Seed {
         this.name = aName;
         this.area = anArea;
         this.season = aSeason;
-        //this.plantDate = aDate;
-        //Object self;
+        //this.plantDate = aDate; note expand with api later perhaps
         this.plantDate = simpleDateGet(aSeason);
         //this.packets = packets;
         this.reminder = false;
