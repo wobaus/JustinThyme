@@ -18,8 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.JustinThyme.justinthymer.models.forms.Seed.Season.FALL;
+import static jdk.nashorn.internal.objects.NativeArray.length;
+
 
 @Controller
 @RequestMapping("JustinThyme")
@@ -88,7 +93,14 @@ public class MainController {
         } else {
             userDao.save(newUser);
             model.addAttribute("user", newUser);
+            Seed.Area area = newUser.getArea();
+            //Packet seeds = new Packet(newUser.getId(), seedDao.findByArea(area));
+            List<Seed> seeds = new ArrayList<>();
+            seeds = seedDao.findByArea(area);
+
+            model.addAttribute("seeds", seeds);
             //return "/welcome-user";
+            //return "redirect:seed-edit";
             return "/seed-edit";
         }
     }
@@ -96,20 +108,29 @@ public class MainController {
     @RequestMapping(value = "/seed-edit", method = RequestMethod.GET)
     public String showSeeds(Model model, User newUser) {
         Seed.Area area = newUser.getArea();
+        System.out.println("**********************" + newUser.getId());
+        model.addAttribute(new Packet());
         model.addAttribute("seeds", seedDao.findByArea(area));
+        model.addAttribute("user", newUser);
         return "/seed-edit";
     }
 
 
 
     @RequestMapping(value = "/seed-edit", method = RequestMethod.POST)
-    public String seedListing(Model model, @ModelAttribute Packet aPacket, @RequestParam List<Seed> seeds,
-                              User currentUser) {
-        for (Seed seed : seeds)
-            aPacket.addSeed(seed);
-        aPacket.setUser_id(currentUser.getId());
+    public String seedListing(Model model, User newUser, @ModelAttribute Packet aPacket, @RequestParam int[] seedIds,
+                              Integer userId) {
+
+        for (int seedId : seedIds) {
+            Seed seedToPlant = seedDao.findOne(seedId);
+            aPacket.addSeed(seedToPlant);
+        }
+        System.out.println("================" + userId);
+        aPacket.setUser_id(userId);
         packetDao.save(aPacket);
+        User currentUser = userDao.findOne(userId);
         model.addAttribute("user", currentUser);
+        model.addAttribute("packet", aPacket);
         return "/welcome-user";
 
 

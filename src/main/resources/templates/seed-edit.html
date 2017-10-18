@@ -8,16 +8,16 @@
 <body>
 <h1 th:text="|Hey ${user.username}, here's a list of seeds that grow in you're area: |">seeds</h1>
 
-<form method="post">
+<form method="post" action="seed-edit">
     <p>Check what seeds you like and we will automatically send you updates!</p>
-<tr th:each="seed : ${seeds}">
-    <ul>
-        <li><input type="checkbox" name="seedsToPlant" value="${seed.name}" /></li>
+<ul th:each="seed : ${seeds}">
+
+        <li><input th:text="${seed.name}" type="checkbox" name="seedIds" th:value="${seed.getId()}"/></li>
     </ul>
 
-    <input type="hidden" value="${user.id}" name="userId" />
+    <input type="hidden" th:value="${user.getId()}" name="userId" />
     <input type="submit" value="Seed Me, Seedmore!" />
-</tr>
+
 </form>
 </body>
 </html>
