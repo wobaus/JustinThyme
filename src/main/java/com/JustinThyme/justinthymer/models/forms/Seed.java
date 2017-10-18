@@ -17,8 +17,9 @@ public class Seed {
 
     public enum Area {
 
-        WESTCOAST ("West Coast"), INNERNW ("Inner Northwest"), INNERSW ("Inner Southwest"),
-        SOUTH ("South"), MIDNORTH ("Mid North"), EASTCOAST ("East Coast"), FLORIDA ("Florida");
+        WESTCOAST ("West Coast"), NORTHWEST("Northwest"), SOUTHWEST ("Southwest"),
+        MIDSOUTH ("South"), MIDNORTH ("Mid North"), NORTHEAST ("North East"), SOUTHEAST ("South East"),
+        FLORIDA ("Florida");
 
         private final String name;
 
