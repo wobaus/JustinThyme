@@ -6,6 +6,18 @@
 </head>
 
 <body>
+<h1 th:text="|Hey ${user.username}, here's a list of seeds that grow in you're area: |">seeds</h1>
 
+<form method="post">
+    <p>Check what seeds you like and we will automatically send you updates!</p>
+<tr th:each="seed : ${seeds}">
+    <ul>
+        <li><input type="checkbox" name="seedsToPlant" value="seed.name"></li>
+    </ul>
+
+    <input type="hidden" value="${user.id}" name="userId">
+    <input type="submit" value="Seed Me, Seedmore!">
+</tr>
+</form>
 </body>
 </html>

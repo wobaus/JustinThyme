@@ -4,6 +4,7 @@ package com.JustinThyme.justinthymer.controllers.GroundControl;
 import com.JustinThyme.justinthymer.models.data.PacketDao;
 import com.JustinThyme.justinthymer.models.data.SeedDao;
 import com.JustinThyme.justinthymer.models.data.UserDao;
+import com.JustinThyme.justinthymer.models.forms.Packet;
 import com.JustinThyme.justinthymer.models.forms.Seed;
 import com.JustinThyme.justinthymer.models.forms.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -83,9 +85,34 @@ public class MainController {
         } else {
             userDao.save(newUser);
             model.addAttribute("user", newUser);
-            return "/welcome-user";
+            //return "/welcome-user";
+            return "/seed-edit";
         }
     }
+
+    @RequestMapping(value = "/seed-edit", method = RequestMethod.GET)
+    public String showSeeds(Model model, User newUser) {
+        Seed.Area area = newUser.getArea();
+        model.addAttribute("seeds", seedDao.findByArea(area));
+        return "/seed-edit";
+    }
+
+
+
+    @RequestMapping(value = "/seed-edit", method = RequestMethod.POST)
+    public String seedListing(Model model, @ModelAttribute Packet aPacket, @RequestParam List<Seed> seeds,
+                              User currentUser) {
+        for (Seed seed : seeds)
+            aPacket.addSeed(seed);
+        aPacket.setUser_id(currentUser.getId());
+        packetDao.save(aPacket);
+        model.addAttribute("user", currentUser);
+        return "/welcome-user";
+
+
+    }
+
+
 
 
 
