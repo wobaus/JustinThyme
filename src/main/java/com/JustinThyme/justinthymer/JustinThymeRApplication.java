@@ -118,6 +118,14 @@ public class JustinThymeRApplication {
 //			seedDao.save(new Seed("Asparagus", NORTHEAST, SPRING));
 //			seedDao.save(new Seed("Potatoes", NORTHEAST, SPRING));
 //			seedDao.save(new Seed("Pumpkins", NORTHEAST, SPRING));
+//
+//			seedDao.save(new Seed("DEMO", NORTHWEST, TONIGHT));
+//			seedDao.save(new Seed("DEMO", WESTCOAST, TONIGHT));
+//			seedDao.save(new Seed("DEMO", MIDNORTH, TONIGHT));
+//			seedDao.save(new Seed("DEMO", MIDSOUTH, TONIGHT));
+//			seedDao.save(new Seed("DEMO", NORTHEAST, TONIGHT));
+//			seedDao.save(new Seed("DEMO", FLORIDA, TONIGHT));
+//			seedDao.save(new Seed("DEMO", SOUTHEAST, TONIGHT));
 
 		};
 	}

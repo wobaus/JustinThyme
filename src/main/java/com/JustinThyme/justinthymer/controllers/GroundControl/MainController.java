@@ -1,6 +1,7 @@
 package com.JustinThyme.justinthymer.controllers.GroundControl;
 
 
+import com.JustinThyme.justinthymer.controllers.TwilioReminder.TwillTask;
 import com.JustinThyme.justinthymer.models.data.PacketDao;
 import com.JustinThyme.justinthymer.models.data.SeedDao;
 import com.JustinThyme.justinthymer.models.data.UserDao;
@@ -21,7 +22,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.util.Timer;
 import static com.JustinThyme.justinthymer.models.forms.Seed.Season.FALL;
 import static jdk.nashorn.internal.objects.NativeArray.length;
 
@@ -121,14 +122,30 @@ public class MainController {
     public String seedListing(Model model, User newUser, @ModelAttribute Packet aPacket, @RequestParam int[] seedIds,
                               Integer userId) {
 
+        //goes through list of chosen seeds and adds them to user's packet
         for (int seedId : seedIds) {
             Seed seedToPlant = seedDao.findOne(seedId);
             aPacket.addSeed(seedToPlant);
+            aPacket.setReminder(seedToPlant);//note turns reminder on for all seeds in this sprint
         }
-        System.out.println("================" + userId);
+
+
         aPacket.setUser_id(userId);
         packetDao.save(aPacket);
         User currentUser = userDao.findOne(userId);
+
+
+        String number = currentUser.getPhoneNumber(); ;//note will only work with my number for now
+        Timer timer = new Timer(true);
+
+        for (Seed seed : aPacket.getSeeds()) {
+            String message = "It's time to plant " + seed.name;
+            Date date = seed.getPlantDate();
+            System.out.println("+++++++++++" + seed.plantDate);
+            System.out.println(message);
+            System.out.println("=====================" + number);
+            timer.schedule(new TwillTask.TwillReminder(message, number), date);
+        }
         model.addAttribute("user", currentUser);
         model.addAttribute("packet", aPacket);
         return "/welcome-user";
