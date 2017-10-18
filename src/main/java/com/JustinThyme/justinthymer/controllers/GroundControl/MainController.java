@@ -4,6 +4,7 @@ package com.JustinThyme.justinthymer.controllers.GroundControl;
 import com.JustinThyme.justinthymer.models.data.PacketDao;
 import com.JustinThyme.justinthymer.models.data.SeedDao;
 import com.JustinThyme.justinthymer.models.data.UserDao;
+import com.JustinThyme.justinthymer.models.forms.Packet;
 import com.JustinThyme.justinthymer.models.forms.Seed;
 import com.JustinThyme.justinthymer.models.forms.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -41,49 +43,79 @@ public class MainController {
 
     }
 
-    @RequestMapping(value="login", method = RequestMethod.GET)
+    @RequestMapping(value="/login", method = RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("title", "Log on in!");
-        return "login";
+        model.addAttribute(new User());
+        return "/login";
     }
-    @RequestMapping(value="login", method = RequestMethod.POST)
-    public String login(@ModelAttribute @Valid User someUser, Error errors, Model model) {
-        User knownUser = userDao.findOne(someUser.getId());
+    // @ModelAttribute @Valid User user, Error errors
+    @RequestMapping(value="/login", method = RequestMethod.POST)
+    public String login(Model model, User user) {
+        User knownUser = userDao.findOne(user.getId());
+        // User knownUser = userDao.findOne(findByUsername());
 
-        if (someUser.getPassword() == knownUser.getPassword()) {
-            model.addAttribute("user", someUser);
-            return "welcome-user";
+        if (user.getPassword() == knownUser.getPassword()) {
+            model.addAttribute("user", user);
+            return "/welcome-user";
         } else {
             model.addAttribute("title", "NO user by that name or incorrect password!");
-            return "login";
+            return "/login";
         }
     }
 
 
-    @RequestMapping(value = "signup", method = RequestMethod.GET)
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("title", "New User!");
         model.addAttribute(new User());
-        return "signup";
+        model.addAttribute("areas", Seed.Area.values());
+        return "/signup";
     }
 
-    @RequestMapping(value = "signup", method = RequestMethod.POST)
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String add(@ModelAttribute @Valid User newUser, Errors errors, Model model,
                       String passwordVerify) {
 
         String username = newUser.username;
-        newUser.checkPassword();
+        //newUser.checkPassword();
         if (errors.hasErrors()) {
             model.addAttribute("title", "Try again");
             model.addAttribute(newUser);
-            return "signup";
+            model.addAttribute("areas", Seed.Area.values());
+            return "/signup";
 
         } else {
             userDao.save(newUser);
             model.addAttribute("user", newUser);
-            return "welcome-user";
+            //return "/welcome-user";
+            return "/seed-edit";
         }
     }
+
+    @RequestMapping(value = "/seed-edit", method = RequestMethod.GET)
+    public String showSeeds(Model model, User newUser) {
+        Seed.Area area = newUser.getArea();
+        model.addAttribute("seeds", seedDao.findByArea(area));
+        return "/seed-edit";
+    }
+
+
+
+    @RequestMapping(value = "/seed-edit", method = RequestMethod.POST)
+    public String seedListing(Model model, @ModelAttribute Packet aPacket, @RequestParam List<Seed> seeds,
+                              User currentUser) {
+        for (Seed seed : seeds)
+            aPacket.addSeed(seed);
+        aPacket.setUser_id(currentUser.getId());
+        packetDao.save(aPacket);
+        model.addAttribute("user", currentUser);
+        return "/welcome-user";
+
+
+    }
+
+
 
 
 
