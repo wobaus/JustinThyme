@@ -81,16 +81,24 @@ public class MainController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String add(@ModelAttribute @Valid User newUser, Errors errors, Model model,
-                      String passwordVerify) {
+                      String verifyPassword) {
 
         String username = newUser.username;
+        String password = newUser.getPassword();
         //newUser.checkPassword();
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Try again");
-            model.addAttribute(newUser);
-            model.addAttribute("areas", Seed.Area.values());
-            return "/signup";
 
+        if (errors.hasErrors() || (!password.equals(verifyPassword))) {
+            if(password != "" && !password.equals(verifyPassword)) {
+                model.addAttribute("errorMessage", "Passwords do not match.");
+                model.addAttribute("title", "Try again");
+                model.addAttribute(newUser);
+                model.addAttribute("areas", Seed.Area.values());
+            } else if (password != "" && password.equals(verifyPassword)){
+                model.addAttribute("title", "Try again");
+                model.addAttribute(newUser);
+                model.addAttribute("areas", Seed.Area.values());
+            }
+            return "/signup";
         } else {
             userDao.save(newUser);
             model.addAttribute("user", newUser);
