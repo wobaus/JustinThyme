@@ -12,7 +12,7 @@ public class Seed {
 
     @Id
     @GeneratedValue
-    private int id;
+    public int id;
     public String name;
 
     public enum Area {
