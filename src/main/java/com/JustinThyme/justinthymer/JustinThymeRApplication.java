@@ -7,9 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Date;
-import java.util.List;
-
 import static com.JustinThyme.justinthymer.models.forms.Seed.Area.*;
 import static com.JustinThyme.justinthymer.models.forms.Seed.Season.*;
 

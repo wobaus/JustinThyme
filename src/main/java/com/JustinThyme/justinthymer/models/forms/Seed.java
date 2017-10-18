@@ -16,7 +16,16 @@ public class Seed {
     public String name;
 
     public enum Area {
-        WESTCOAST, INNERNW, INNERSW, SOUTH, MIDNORTH, EASTCOAST, FLORIDA
+        WESTCOAST ("West Coast"), INNERNW ("Inner Northwest"), INNERSW ("Inner Southwest"),
+        SOUTH ("South"), MIDNORTH ("Mid North"), EASTCOAST ("East Coast"), FLORIDA ("Florida");
+
+        private final String name;
+
+        Area(String name) { this.name = name;}
+
+        public String getName() {
+            return name;
+        }
     }
 
 

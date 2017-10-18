@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
@@ -19,6 +20,8 @@ public class User {
     private int id;
 
     @NotNull
+    //regex pattern prevents empty string but allows spaces within the string
+    @Pattern(regexp="(.|\\s)*\\S(.|\\s)*", message="Name must not be empty.")
     public String username;
 
     @NotNull
