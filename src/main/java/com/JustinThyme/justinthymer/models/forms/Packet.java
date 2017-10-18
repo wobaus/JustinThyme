@@ -22,6 +22,8 @@ public class Packet {
     List<Seed> seeds = new ArrayList<>();
 
 
+    public Packet(Integer user_id, List<Seed> seeds) {}
+
     public Packet() { }
 
 

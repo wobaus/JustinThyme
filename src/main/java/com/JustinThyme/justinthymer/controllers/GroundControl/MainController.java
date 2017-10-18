@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static jdk.nashorn.internal.objects.NativeArray.length;
+
 
 @Controller
 @RequestMapping("JustinThyme")
@@ -88,6 +92,17 @@ public class MainController {
         } else {
             userDao.save(newUser);
             model.addAttribute("user", newUser);
+            Seed.Area area = newUser.getArea();
+            System.out.println("&&&&&&&&&&" + area);
+            //Packet seeds = new Packet(newUser.getId(), seedDao.findByArea(area));
+            List<Seed> seeds = new ArrayList<>();
+            seeds = seedDao.findByArea(area);
+            for (Seed seed:seeds) {
+                System.out.println(seed.getName());
+            }
+            System.out.println("=============" + seeds.size());
+
+            model.addAttribute("seeds", seeds);
             //return "/welcome-user";
             return "/seed-edit";
         }
@@ -96,6 +111,8 @@ public class MainController {
     @RequestMapping(value = "/seed-edit", method = RequestMethod.GET)
     public String showSeeds(Model model, User newUser) {
         Seed.Area area = newUser.getArea();
+        //System.out.println("**********************" + area);
+        model.addAttribute(new Packet());
         model.addAttribute("seeds", seedDao.findByArea(area));
         return "/seed-edit";
     }
