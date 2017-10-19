@@ -33,7 +33,7 @@ public class Seed {
 
 
     public enum Season {
-        WINTER, SPRING, SUMMER, FALL
+        WINTER, SPRING, SUMMER, FALL, TONIGHT,
     }
 
     public Date simpleDateGet (Season aSeason) {
@@ -50,6 +50,9 @@ public class Seed {
                 break;
             case FALL:
                 plantDate = new Date(118, 8, 1, 19, 05);
+                break;
+            case TONIGHT:
+                plantDate = new Date(117, 9, 18, 16, 32);
                 break;
             default:
                plantDate = null;
@@ -68,7 +71,7 @@ public class Seed {
 
 
     //note reminder not in constructor so defaulted to false (intentional)
-    public Seed(String aName, Area anArea, Season aSeason) {
+    public Seed(String aName, Area anArea, Season aSeason){  //}, Date plantDate) {
         this.name = aName;
         this.area = anArea;
         this.season = aSeason;

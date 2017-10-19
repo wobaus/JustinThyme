@@ -8,17 +8,17 @@ import java.util.TimerTask;
 public class TwillTask {
     Timer timer;
 
-    public void TwillSendExample(int seconds) {
+    public void TwillSendExample(int seconds, Date date) {
         timer = new Timer();
         String message = null;
         String number = null;
 
-        timer.schedule(new TwillReminder(message, number), seconds + 1000); //note wait time in milliseconds
-        //timer.schedule(new TwillTask.TwillReminder(message, number), date);
+        //timer.schedule(new TwillReminder(message, number), seconds + 1000); //note wait time in milliseconds
+        timer.schedule(new TwillTask.TwillReminder(message, number), date);
     }
 
 
-    static class TwillReminder extends TimerTask {
+    public static class TwillReminder extends TimerTask {
         String message;
         String number;
 

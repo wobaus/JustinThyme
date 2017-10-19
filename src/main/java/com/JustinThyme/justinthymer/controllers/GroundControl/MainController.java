@@ -1,6 +1,7 @@
 package com.JustinThyme.justinthymer.controllers.GroundControl;
 
 
+import com.JustinThyme.justinthymer.controllers.TwilioReminder.TwillTask;
 import com.JustinThyme.justinthymer.models.data.PacketDao;
 import com.JustinThyme.justinthymer.models.data.SeedDao;
 import com.JustinThyme.justinthymer.models.data.UserDao;
@@ -18,8 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import static com.JustinThyme.justinthymer.models.forms.Seed.Season.FALL;
+import static jdk.nashorn.internal.objects.NativeArray.length;
+
 
 @Controller
 @RequestMapping("JustinThyme")
@@ -75,20 +81,35 @@ public class MainController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String add(@ModelAttribute @Valid User newUser, Errors errors, Model model,
-                      String passwordVerify) {
+                      String verifyPassword) {
 
         String username = newUser.username;
+        String password = newUser.getPassword();
         //newUser.checkPassword();
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Try again");
-            model.addAttribute(newUser);
-            model.addAttribute("areas", Seed.Area.values());
-            return "/signup";
 
+        if (errors.hasErrors() || (!password.equals(verifyPassword))) {
+            if(password != "" && !password.equals(verifyPassword)) {
+                model.addAttribute("errorMessage", "Passwords do not match.");
+                model.addAttribute("title", "Try again");
+                model.addAttribute(newUser);
+                model.addAttribute("areas", Seed.Area.values());
+            } else if (password != "" && password.equals(verifyPassword)){
+                model.addAttribute("title", "Try again");
+                model.addAttribute(newUser);
+                model.addAttribute("areas", Seed.Area.values());
+            }
+            return "/signup";
         } else {
             userDao.save(newUser);
             model.addAttribute("user", newUser);
+            Seed.Area area = newUser.getArea();
+            //Packet seeds = new Packet(newUser.getId(), seedDao.findByArea(area));
+            List<Seed> seeds = new ArrayList<>();
+            seeds = seedDao.findByArea(area);
+
+            model.addAttribute("seeds", seeds);
             //return "/welcome-user";
+            //return "redirect:seed-edit";
             return "/seed-edit";
         }
     }
@@ -96,20 +117,45 @@ public class MainController {
     @RequestMapping(value = "/seed-edit", method = RequestMethod.GET)
     public String showSeeds(Model model, User newUser) {
         Seed.Area area = newUser.getArea();
+        System.out.println("**********************" + newUser.getId());
+        model.addAttribute(new Packet());
         model.addAttribute("seeds", seedDao.findByArea(area));
+        model.addAttribute("user", newUser);
         return "/seed-edit";
     }
 
 
 
     @RequestMapping(value = "/seed-edit", method = RequestMethod.POST)
-    public String seedListing(Model model, @ModelAttribute Packet aPacket, @RequestParam List<Seed> seeds,
-                              User currentUser) {
-        for (Seed seed : seeds)
-            aPacket.addSeed(seed);
-        aPacket.setUser_id(currentUser.getId());
+    public String seedListing(Model model, User newUser, @ModelAttribute Packet aPacket, @RequestParam int[] seedIds,
+                              Integer userId) {
+
+        //goes through list of chosen seeds and adds them to user's packet
+        for (int seedId : seedIds) {
+            Seed seedToPlant = seedDao.findOne(seedId);
+            aPacket.addSeed(seedToPlant);
+            aPacket.setReminder(seedToPlant);//note turns reminder on for all seeds in this sprint
+        }
+
+
+        aPacket.setUser_id(userId);
         packetDao.save(aPacket);
+        User currentUser = userDao.findOne(userId);
+
+
+        String number = currentUser.getPhoneNumber(); ;//note will only work with my number for now
+        Timer timer = new Timer(true);
+
+        for (Seed seed : aPacket.getSeeds()) {
+            String message = "It's time to plant " + seed.name;
+            Date date = seed.getPlantDate();
+            System.out.println("+++++++++++" + seed.plantDate);
+            System.out.println(message);
+            System.out.println("=====================" + number);
+            timer.schedule(new TwillTask.TwillReminder(message, number), date);
+        }
         model.addAttribute("user", currentUser);
+        model.addAttribute("packet", aPacket);
         return "/welcome-user";
 
 

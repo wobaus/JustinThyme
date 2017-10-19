@@ -22,6 +22,8 @@ public class Packet {
     List<Seed> seeds = new ArrayList<>();
 
 
+    public Packet(Integer user_id, List<Seed> seeds) {}
+
     public Packet() { }
 
 
@@ -31,7 +33,7 @@ public class Packet {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
