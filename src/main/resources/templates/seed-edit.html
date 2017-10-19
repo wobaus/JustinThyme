@@ -6,6 +6,9 @@
 </head>
 
 <body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
 <h1 th:text="|Hey ${user.username}, here's a list of seeds that grow in you're area: |">seeds</h1>
 
 <form method="post">
